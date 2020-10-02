@@ -1,42 +1,17 @@
+//imports
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const jsonParser = bodyParser.json();
-var db = null;
 
-const MongoClient = require('mongodb').MongoClient 
-const uri = "mongodb://arleudo:elfo1977@localhost:27017/?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000"
-MongoClient.connect(uri, (err, client) => {
-    if(err){
-        return console.log(err);
-    }
+//models
+require("./src/models/Employee");
 
-    db = client.db("quanta");
-
-    app.listen(9000, function(){
-        console.log("Rodando");
-    });
-})
-
+//uses
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.json());
+app.use('/qnt/', require("./src/routes"));
 
-app.get("/", (req, res)=>{
-    res.send("Heloo");
+//start server
+app.listen(7777, function () {
+    console.log("Server running!");
 });
-
-app.post("/employee", jsonParser, (req, res)=>{
-    const employee = req.body;
-    db.collection('employee').save(employee, (err, result)=>{
-        if(err) return console.log(err);
-
-        console.log("salvo");
-        res.redirect("/");
-    })
-    console.log(employee);
-    res.json(employee);
-});
-
-
-
