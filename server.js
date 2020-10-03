@@ -7,6 +7,7 @@ const cors = require("cors");
 require("./src/models/Client");
 require("./src/models/Employee");
 require("./src/models/Functions");
+require("./src/models/Uniform");
 
 
 //uses

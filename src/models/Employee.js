@@ -9,6 +9,10 @@ const EmployeeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    client: {
+        type: String,
+        required: true
+    },
     cpf: {
         type: String,
         required: true
