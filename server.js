@@ -4,8 +4,10 @@ const app = express();
 const cors = require("cors");
 
 //models
+require("./src/models/Client");
 require("./src/models/Employee");
 require("./src/models/Functions");
+
 
 //uses
 app.use(cors());
